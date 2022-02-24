@@ -1,4 +1,4 @@
-package com.patika.case3sinanoral;
+package com.patika;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
