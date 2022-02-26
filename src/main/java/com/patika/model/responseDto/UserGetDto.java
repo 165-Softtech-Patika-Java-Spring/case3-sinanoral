@@ -4,7 +4,7 @@ import com.patika.model.entity.UserType;
 import lombok.Data;
 
 @Data
-public class UserDto {
+public class UserGetDto {
     private String email;
     private String phoneNumber;
     private String userName;
