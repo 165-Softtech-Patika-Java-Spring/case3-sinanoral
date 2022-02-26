@@ -2,7 +2,7 @@ package com.patika.mapper;
 
 import com.patika.model.entity.Product;
 import com.patika.model.requestDto.ProductCreateDto;
-import com.patika.model.responseDto.ProductDto;
+import com.patika.model.responseDto.ProductGetDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProductMapper {
     Product productCreateDtoToProduct(ProductCreateDto productCreateDto);
 
-    List<ProductDto> productListToProductDtoList(List<Product> products);
+    List<ProductGetDto> productListToProductDtoList(List<Product> products);
 
-    ProductDto productToProductDto(Product product);
+    ProductGetDto productToProductDto(Product product);
 }

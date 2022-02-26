@@ -2,7 +2,7 @@ package com.patika.controller;
 
 import com.patika.model.requestDto.ProductCreateDto;
 import com.patika.model.requestDto.ProductUpdateDto;
-import com.patika.model.responseDto.ProductDto;
+import com.patika.model.responseDto.ProductGetDto;
 import com.patika.service.ProductService;
 import com.patika.utilities.results.DataResult;
 import com.patika.utilities.results.Result;
@@ -19,12 +19,12 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping()
-    public DataResult<List<ProductDto>> getAll() {
+    public DataResult<List<ProductGetDto>> getAll() {
         return productService.getAll();
     }
 
     @GetMapping("/{id}")
-    public DataResult<ProductDto> getById(@PathVariable Long id) {
+    public DataResult<ProductGetDto> getById(@PathVariable Long id) {
         return productService.getById(id);
     }
 

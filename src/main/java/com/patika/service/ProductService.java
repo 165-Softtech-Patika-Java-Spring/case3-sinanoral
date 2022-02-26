@@ -1,11 +1,13 @@
 package com.patika.service;
 
 import com.patika.dao.ProductDao;
+import com.patika.enums.errors.ProductErrorMessage;
+import com.patika.exception.NotFoundException;
 import com.patika.mapper.ProductMapper;
 import com.patika.model.entity.Product;
 import com.patika.model.requestDto.ProductCreateDto;
 import com.patika.model.requestDto.ProductUpdateDto;
-import com.patika.model.responseDto.ProductDto;
+import com.patika.model.responseDto.ProductGetDto;
 import com.patika.utilities.results.DataResult;
 import com.patika.utilities.results.Result;
 import com.patika.utilities.results.SuccessDataResult;
@@ -13,7 +15,6 @@ import com.patika.utilities.results.SuccessResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -23,10 +24,13 @@ public class ProductService {
     private final ProductDao productDao;
     private final ProductMapper mapper;
 
-    public DataResult<List<ProductDto>> getAll() {
+    public DataResult<List<ProductGetDto>> getAll() {
         List<Product> products = productDao.findAll();
-        List<ProductDto> productDtoList = mapper.productListToProductDtoList(products);
-        return new SuccessDataResult<>(productDtoList);
+        if (products.isEmpty())
+            throw new NotFoundException(ProductErrorMessage.PRODUCT_NOT_FOUND);
+
+        List<ProductGetDto> productGetDtoList = mapper.productListToProductDtoList(products);
+        return new SuccessDataResult<>(productGetDtoList);
     }
 
     public Result create(ProductCreateDto productCreateDto) {
@@ -35,16 +39,16 @@ public class ProductService {
         return new SuccessResult("Product Created!");
     }
 
-    public DataResult<ProductDto> getById(Long id) {
+    public DataResult<ProductGetDto> getById(Long id) {
         Product product = productDao.findById(id).orElseThrow();
-        ProductDto productDto = mapper.productToProductDto(product);
-        return new SuccessDataResult<>(productDto);
+        ProductGetDto productGetDto = mapper.productToProductDto(product);
+        return new SuccessDataResult<>(productGetDto);
     }
 
     private void existsById(Long id) {
         boolean exist = productDao.existsById(id);
         if (!exist)
-            throw new NotFoundException("");
+            throw new NotFoundException(ProductErrorMessage.PRODUCT_NOT_FOUND);
     }
 
     public Result deleteById(Long id) {
@@ -58,5 +62,10 @@ public class ProductService {
         existsById(id);
         productDao.setPriceById(id, productUpdateDto.getPrice());
         return new SuccessResult("Product price updated");
+    }
+
+    //For mapper to use
+    public Product findById(Long id) {
+        return productDao.getById(id);
     }
 }

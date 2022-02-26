@@ -1,7 +1,8 @@
 package com.patika.controller;
 
 import com.patika.model.requestDto.UserCreateDto;
-import com.patika.model.responseDto.UserDto;
+import com.patika.model.requestDto.UserUpdateDto;
+import com.patika.model.responseDto.UserGetDto;
 import com.patika.service.UserService;
 import com.patika.utilities.results.DataResult;
 import com.patika.utilities.results.Result;
@@ -17,17 +18,17 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping()
-    public DataResult<List<UserDto>> getAll() {
+    public DataResult<List<UserGetDto>> getAll() {
         return userService.getAll();
     }
 
     @GetMapping("/{id}")
-    public DataResult<UserDto> getById(@PathVariable Long id) {
+    public DataResult<UserGetDto> getById(@PathVariable Long id) {
         return userService.getById(id);
     }
 
     @GetMapping("/username/{userName}")
-    public DataResult<UserDto> getByName(@PathVariable String userName) {
+    public DataResult<UserGetDto> getByName(@PathVariable String userName) {
         return userService.getByName(userName);
     }
 
@@ -41,8 +42,8 @@ public class UserController {
         return userService.deleteByUserNameAndPhoneNumber(userName, phoneNumber);
     }
 
-//    @PutMapping("/{id}")
-//    public Result updatePriceById(@PathVariable Long id, @RequestBody UserUpdateDto userUpdateDto) {
-//        return userService.(id, userUpdateDto);
-//    }
+    @PutMapping("/{id}")
+    public Result updateUserById(@PathVariable Long id, @RequestBody UserUpdateDto userUpdateDto) {
+        return userService.updateUserById(id, userUpdateDto);
+    }
 }

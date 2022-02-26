@@ -1,7 +1,8 @@
 package com.patika.controller;
 
 import com.patika.model.requestDto.CommentCreateDto;
-import com.patika.model.responseDto.CommentDto;
+import com.patika.model.responseDto.CommentProductGetDto;
+import com.patika.model.responseDto.CommentUserGetDto;
 import com.patika.service.CommentService;
 import com.patika.utilities.results.DataResult;
 import com.patika.utilities.results.Result;
@@ -16,13 +17,13 @@ import java.util.List;
 public class CommentController {
     private final CommentService commentService;
 
-//    @GetMapping("/users/{id}")
-//    public DataResult<List<CommentDto>> getCommentsByUserId(@PathVariable Long id) {
-//        return commentService.getCommentsByUserId(id);
-//    }
+    @GetMapping("/users/{id}")
+    public DataResult<List<CommentUserGetDto>> getCommentsByUserId(@PathVariable Long id) {
+        return commentService.getCommentsByUserId(id);
+    }
 
     @GetMapping("/products/{id}")
-    public DataResult<List<CommentDto>> getCommentsByProductId(@PathVariable Long id) {
+    public DataResult<List<CommentProductGetDto>> getCommentsByProductId(@PathVariable Long id) {
         return commentService.getCommentsByProductId(id);
     }
 

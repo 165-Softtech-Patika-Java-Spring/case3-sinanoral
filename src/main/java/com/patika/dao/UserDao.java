@@ -9,8 +9,4 @@ public interface UserDao extends JpaRepository<User, Long> {
     Optional<User> findByUserName(String userName);
 
     Long deleteUserByUserNameAndPhoneNumber(String userName, String phoneNumber);
-
-//    @Modifying
-//    @Query()
-//    boolean updateUserById(Long id);
 }

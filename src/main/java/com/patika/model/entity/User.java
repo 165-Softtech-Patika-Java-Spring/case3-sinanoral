@@ -25,6 +25,6 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments;
 }
