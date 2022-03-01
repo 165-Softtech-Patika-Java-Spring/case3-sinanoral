@@ -65,7 +65,7 @@ Bir online alışveriş sitesinin kullanıcı, ürün ve yorumlarını yöneten 
 ```http
   DELETE /users
 ```
-#### query
+#### query params
 | Parametre | Tip       | Açıklama       |
 | :-------- | :-------  | :------------  |
 | `userName` | `string` | **required**   |
